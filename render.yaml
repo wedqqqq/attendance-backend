@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: attendance-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false          # set in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+      - key: QR_SIGNING_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false          # set after Cloudflare Pages deploy
+      - key: TZ
+        value: Asia/Ho_Chi_Minh
+      - key: CHECKIN_RADIUS_METERS
+        value: "50"
+      - key: ACTIVE_ZONE_RADIUS_METERS
+        value: "400"
+      - key: VIOLATION_GRACE_PERIOD_MINUTES
+        value: "5"
+      - key: GPS_ACCURACY_THRESHOLD_METERS
+        value: "50"
